@@ -8,13 +8,17 @@ use Jabranr\PostcodesIO\PostcodesIO;
 use App\Models\Calculation;
 use App\Models\Location;
 use App\Models\Location\Time as LocationTime;
+use Illuminate\Support\Str;
 
 class ActionController extends Controller {
     public function getNearestLocation($postcode) {
-        if(strlen($postcode) > 8) {
+        $postcodeFinder = new PostcodesIO();
+        // if(strlen($postcode) > 8) {
+        //     return response()->json(['success' => false, 'message' => 'Invalid postcode.']);
+        // }
+        if (!$postcodeFinder->validate($postcode)) {
             return response()->json(['success' => false, 'message' => 'Invalid postcode.']);
         }
-        $postcodeFinder = new PostcodesIO();
         $response = json_decode(json_encode($postcodeFinder->find($postcode)), true);
         if($response['status'] == 200) {
             $long = $response['result']['longitude'];
@@ -46,12 +50,15 @@ class ActionController extends Controller {
         $validator = Validator::make($request->all(), [
             'postcode'      => 'bail|required|max:8',
             'opening_times' => 'bail|required|array',
-            'closing_times' => 'bail|required|array',
+            'closing_times' => 'bail|required|array'
         ]);
         if($validator->fails()) {
             return $this->returnCustomJsonValidatorError($validator);
         }
         $postcodeFinder = new PostcodesIO();
+        if (!$postcodeFinder->validate($postcode)) {
+            return response()->json(['success' => false, 'message' => 'Invalid postcode.']);
+        }
         $response = json_decode(json_encode($postcodeFinder->find($request->input('postcode'))), true);
         if($response['status'] == 200) {
             $long = $response['result']['longitude'];
