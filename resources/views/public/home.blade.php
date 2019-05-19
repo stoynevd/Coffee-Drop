@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col ml-5">
                 <h3> Enter your postcode to check the nearest Coffee Drop </h3>
-                    <input v-model="postcode" type="text" placeholder="Your postcode">
-                    <button @click="checkPostcode()"> Check Your Postcode </button>
+                <input v-model="postcode" type="text" placeholder="Your postcode">
+                <button @click="checkPostcode()"> Check Your Postcode </button>
             </div>
         </div>
         <div class="row">

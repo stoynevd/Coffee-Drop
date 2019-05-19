@@ -11,5 +11,10 @@ class PageController extends Controller {
         return view('public/home');
 
     }
+    public function showNewCoffeeDrop() {
+
+        return view('public/createCoffeeDrop');
+
+    }
 
 }

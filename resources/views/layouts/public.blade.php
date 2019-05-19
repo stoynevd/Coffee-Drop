@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>AstonEvents</title>
+        <title> Coffee Drop </title>
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link href="/css/noty.css" rel="stylesheet" type="text/css" />
